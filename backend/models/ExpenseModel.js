@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const UserModel = require("./UserModel");
+const CatModel = require("./CategoryModel");
 
 const ExpenseSchema = new mongoose.Schema(
 	{
@@ -24,11 +25,6 @@ const ExpenseSchema = new mongoose.Schema(
 			required: true,
 			trim: true,
 		},
-		category: {
-			type: String,
-			required: true,
-			trim: true,
-		},
 		description: {
 			type: String,
 			required: true,
@@ -37,6 +33,10 @@ const ExpenseSchema = new mongoose.Schema(
 		},
 		user: [
 			{ type: mongoose.Schema.Types.ObjectId, ref: UserModel.collection.name },
+		],
+
+		category: [
+			{ type: mongoose.Schema.Types.ObjectId, ref: CatModel.collection.name },
 		],
 	},
 	{ timestamps: true }

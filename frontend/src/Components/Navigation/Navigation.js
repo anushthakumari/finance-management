@@ -9,7 +9,7 @@ function Navigation({ active, setActive }) {
 	const logout = () => {
 		remove_creds();
 		remove_name();
-		setActive(6);
+		setActive(0);
 	};
 
 	return (

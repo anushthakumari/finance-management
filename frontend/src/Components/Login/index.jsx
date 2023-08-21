@@ -32,7 +32,7 @@ const Index = ({ setActive }) => {
 	};
 
 	const handleRegisterClick = () => {
-		setActive(5);
+		setActive(-1);
 	};
 
 	return (

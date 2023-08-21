@@ -1,4 +1,5 @@
 const UsersSchema = require("../models/UserModel");
+const CategorySchema = require("../models/CategoryModel");
 const asyncHandler = require("../utils/asyncHandler");
 const { generateToken } = require("../libs/jwt");
 
@@ -19,6 +20,16 @@ exports.register = asyncHandler(async (req, res, next) => {
 
 	try {
 		const data = await user.save();
+
+		//creatinf default category
+		const cats = CategorySchema({ title: "Health", user: data._id });
+		const cats1 = CategorySchema({ title: "Groceries", user: data._id });
+
+		//saving
+		cats.save();
+		cats1.save();
+
+		//token
 		const token = generateToken({ id: data._id, email });
 		res.status(201).json({ message: "User Registered", token, name });
 	} catch (error) {

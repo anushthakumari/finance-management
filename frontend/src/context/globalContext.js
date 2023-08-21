@@ -10,6 +10,7 @@ const GlobalContext = React.createContext();
 export const GlobalProvider = ({ children }) => {
 	const [incomes, setIncomes] = useState([]);
 	const [expenses, setExpenses] = useState([]);
+	const [allCategories, setallCategories] = useState([]);
 	const [error, setError] = useState(null);
 
 	//calculate incomes
@@ -83,6 +84,28 @@ export const GlobalProvider = ({ children }) => {
 		getExpenses();
 	};
 
+	const addCategory = async (income) => {
+		const response = await axios
+			.post(`${BASE_URL}add-cat`, income, getHeaderConfig())
+			.catch((err) => {
+				setError(err.response.data.message);
+			});
+		getCategories();
+	};
+
+	const getCategories = async () => {
+		const response = await axios.get(`${BASE_URL}get-cat`, getHeaderConfig());
+		setallCategories(response.data);
+	};
+
+	const deleteCategory = async (id) => {
+		const res = await axios.delete(
+			`${BASE_URL}delete-cat/${id}`,
+			getHeaderConfig()
+		);
+		getCategories();
+	};
+
 	const totalExpenses = () => {
 		let totalIncome = 0;
 		expenses.forEach((income) => {
@@ -110,6 +133,10 @@ export const GlobalProvider = ({ children }) => {
 			value={{
 				register,
 				login,
+				addCategory,
+				deleteCategory,
+				getCategories,
+				allCategories,
 				addIncome,
 				getIncomes,
 				incomes,

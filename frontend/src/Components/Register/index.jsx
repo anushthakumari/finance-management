@@ -39,7 +39,7 @@ const Index = ({ setActive }) => {
 	};
 
 	const handleLoginClick = () => {
-		setActive(6);
+		setActive(0);
 	};
 
 	return (

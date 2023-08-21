@@ -9,13 +9,14 @@ import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Category from "./Components/Category/Category";
 
 import { get_creds } from "./utils/login.utils";
 
 function App() {
 	const token = get_creds();
 
-	const [active, setActive] = useState(token ? 1 : 6);
+	const [active, setActive] = useState(token ? 1 : 0);
 
 	const displayData = () => {
 		switch (active) {
@@ -27,6 +28,8 @@ function App() {
 				return <Income />;
 			case 4:
 				return <Expenses />;
+			case 5:
+				return <Category />;
 
 			default:
 				return <Dashboard />;
@@ -41,12 +44,12 @@ function App() {
 		<AppStyled bg={bg} className="App">
 			{orbMemo}
 			<MainLayout>
-				{active === 5 ? (
+				{active === -1 ? (
 					<Register setActive={setActive} />
-				) : active === 6 ? (
+				) : active === 0 ? (
 					<Login setActive={setActive} />
 				) : null}
-				{active < 5 ? (
+				{active > 0 ? (
 					<React.Fragment>
 						<Navigation active={active} setActive={setActive} />
 						<main>{displayData()}</main>
