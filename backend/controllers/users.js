@@ -20,7 +20,7 @@ exports.register = asyncHandler(async (req, res, next) => {
 	try {
 		const data = await user.save();
 		const token = generateToken({ id: data._id, email });
-		res.status(201).json({ message: "User Registered", token });
+		res.status(201).json({ message: "User Registered", token, name });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ message: "Server Error" });
@@ -35,7 +35,9 @@ exports.login = asyncHandler(async (req, res, next) => {
 	if (d) {
 		if (d.password === pass) {
 			const token = generateToken({ id: d._id, email });
-			res.status(200).send({ message: "Logged in successfully!", token });
+			res
+				.status(200)
+				.send({ message: "Logged in successfully!", token, name: d.name });
 		} else {
 			res.status(400).send({ message: "Invalid Credentials" });
 		}

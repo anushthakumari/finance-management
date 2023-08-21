@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useGlobalContext } from "../../context/globalContext";
-import { set_creds } from "../../utils/login.utils";
+import { set_creds, set_name } from "../../utils/login.utils";
 
 const Index = ({ setActive }) => {
 	const { login } = useGlobalContext();
@@ -17,6 +17,7 @@ const Index = ({ setActive }) => {
 
 			const { data } = await login(email, pass);
 			set_creds(data.token);
+			set_name(data.name);
 			setActive(1);
 		} catch (error) {
 			console.log(error);

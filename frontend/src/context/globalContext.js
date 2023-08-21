@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
+import { getHeaderConfig } from "../utils/login.utils";
+
 const BASE_URL = "http://localhost:5000/api/v1/";
 
 const GlobalContext = React.createContext();
@@ -13,7 +15,7 @@ export const GlobalProvider = ({ children }) => {
 	//calculate incomes
 	const addIncome = async (income) => {
 		const response = await axios
-			.post(`${BASE_URL}add-income`, income)
+			.post(`${BASE_URL}add-income`, income, getHeaderConfig())
 			.catch((err) => {
 				setError(err.response.data.message);
 			});
@@ -29,13 +31,19 @@ export const GlobalProvider = ({ children }) => {
 	};
 
 	const getIncomes = async () => {
-		const response = await axios.get(`${BASE_URL}get-incomes`);
+		const response = await axios.get(
+			`${BASE_URL}get-incomes`,
+			getHeaderConfig()
+		);
 		setIncomes(response.data);
 		console.log(response.data);
 	};
 
 	const deleteIncome = async (id) => {
-		const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+		const res = await axios.delete(
+			`${BASE_URL}delete-income/${id}`,
+			getHeaderConfig()
+		);
 		getIncomes();
 	};
 
@@ -51,7 +59,7 @@ export const GlobalProvider = ({ children }) => {
 	//calculate incomes
 	const addExpense = async (income) => {
 		const response = await axios
-			.post(`${BASE_URL}add-expense`, income)
+			.post(`${BASE_URL}add-expense`, income, getHeaderConfig())
 			.catch((err) => {
 				setError(err.response.data.message);
 			});
@@ -59,13 +67,19 @@ export const GlobalProvider = ({ children }) => {
 	};
 
 	const getExpenses = async () => {
-		const response = await axios.get(`${BASE_URL}get-expenses`);
+		const response = await axios.get(
+			`${BASE_URL}get-expenses`,
+			getHeaderConfig()
+		);
 		setExpenses(response.data);
 		console.log(response.data);
 	};
 
 	const deleteExpense = async (id) => {
-		const res = await axios.delete(`${BASE_URL}delete-expense/${id}`);
+		const res = await axios.delete(
+			`${BASE_URL}delete-expense/${id}`,
+			getHeaderConfig()
+		);
 		getExpenses();
 	};
 
