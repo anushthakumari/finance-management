@@ -10,6 +10,7 @@ import Expenses from "./Components/Expenses/Expenses";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Category from "./Components/Category/Category";
+import Budget from "./Components/Budget/Budget";
 
 import { get_creds } from "./utils/login.utils";
 
@@ -30,6 +31,8 @@ function App() {
 				return <Expenses />;
 			case 5:
 				return <Category />;
+			case 6:
+				return <Budget />;
 
 			default:
 				return <Dashboard />;

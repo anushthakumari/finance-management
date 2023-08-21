@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+
 const UserModel = require("./UserModel");
 const CatModel = require("./CategoryModel");
 
-const ExpenseSchema = new mongoose.Schema(
+const BudgetModal = new mongoose.Schema(
 	{
 		title: {
 			type: String,
@@ -12,21 +13,6 @@ const ExpenseSchema = new mongoose.Schema(
 		},
 		amount: {
 			type: Number,
-			required: true,
-			maxLength: 20,
-			trim: true,
-		},
-		type: {
-			type: String,
-			default: "expense",
-		},
-		date: {
-			type: Date,
-			required: true,
-			trim: true,
-		},
-		description: {
-			type: String,
 			required: true,
 			maxLength: 20,
 			trim: true,
@@ -44,4 +30,4 @@ const ExpenseSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-module.exports = mongoose.model("Expense", ExpenseSchema);
+module.exports = mongoose.model("budgets", BudgetModal);

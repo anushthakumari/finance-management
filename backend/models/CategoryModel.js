@@ -10,9 +10,10 @@ const CategorySchema = new mongoose.Schema(
 			maxLength: 50,
 		},
 
-		user: [
-			{ type: mongoose.Schema.Types.ObjectId, ref: UserModel.collection.name },
-		],
+		user: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: UserModel.collection.name,
+		},
 	},
 	{ timestamps: true }
 );
