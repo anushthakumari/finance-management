@@ -12,6 +12,7 @@ export const GlobalProvider = ({ children }) => {
 	const [expenses, setExpenses] = useState([]);
 	const [allCategories, setallCategories] = useState([]);
 	const [allbudgets, setallbudgets] = useState([]);
+	const [budgetOverview, setbudgetOverview] = useState([]);
 	const [error, setError] = useState(null);
 
 	//calculate incomes
@@ -115,6 +116,15 @@ export const GlobalProvider = ({ children }) => {
 		getBudgets();
 	};
 
+	const getBudgetsOverview = async (income) => {
+		const response = await axios
+			.get(`${BASE_URL}get-budgets-overview`, getHeaderConfig())
+			.catch((err) => {
+				setError(err.response.data.message);
+			});
+		setbudgetOverview(response.data);
+	};
+
 	const getBudgets = async () => {
 		const response = await axios.get(
 			`${BASE_URL}get-budgets`,
@@ -150,7 +160,7 @@ export const GlobalProvider = ({ children }) => {
 			return new Date(b.createdAt) - new Date(a.createdAt);
 		});
 
-		return history.slice(0, 3);
+		return history;
 	};
 
 	return (
@@ -162,6 +172,8 @@ export const GlobalProvider = ({ children }) => {
 				addBudgets,
 				getBudgets,
 				deleteBudgets,
+				getBudgetsOverview,
+				budgetOverview,
 				addCategory,
 				deleteCategory,
 				getCategories,

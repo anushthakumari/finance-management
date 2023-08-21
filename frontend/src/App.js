@@ -11,6 +11,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Category from "./Components/Category/Category";
 import Budget from "./Components/Budget/Budget";
+import History from "./History/History";
 
 import { get_creds } from "./utils/login.utils";
 
@@ -24,7 +25,7 @@ function App() {
 			case 1:
 				return <Dashboard />;
 			case 2:
-				return <Dashboard />;
+				return <History />;
 			case 3:
 				return <Income />;
 			case 4:
