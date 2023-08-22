@@ -1,0 +1,9 @@
+to start the backend server run below commands
+
+cd backend
+npm start
+
+to start the frontend server run below commands (open new terminal in this directory)
+
+cd frontend
+npm start

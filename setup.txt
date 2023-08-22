@@ -1,0 +1,7 @@
+run below steps of command
+
+cd backend
+npm install
+
+cd ../frontend
+npm install

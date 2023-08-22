@@ -1,0 +1,13 @@
+frontend:
+
+ReactJS
+Styled Component
+React Charts
+Axios
+
+Backend:
+
+node Js
+ExpressJs
+Jasonwebtoken
+Mongoose
