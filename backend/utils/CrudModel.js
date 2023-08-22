@@ -5,22 +5,24 @@ const ExpenseModel = require("../models/ExpenseModel");
 const BudgetModel = require("../models/BudgetModel");
 
 class CrudModel {
+	#model = null;
+
 	constructor(collection_name = "") {
 		switch (collection_name) {
 			case "users":
-				this.model = UserModel;
+				this.#model = UserModel;
 				break;
 			case "categories":
-				this.model = CategoryModel;
+				this.#model = CategoryModel;
 				break;
 			case "incomes":
-				this.model = IncomeModel;
+				this.#model = IncomeModel;
 				break;
 			case "expenses":
-				this.model = ExpenseModel;
+				this.#model = ExpenseModel;
 				break;
 			case "budgets":
-				this.model = BudgetModel;
+				this.#model = BudgetModel;
 				break;
 
 			default:
@@ -28,8 +30,16 @@ class CrudModel {
 		}
 	}
 
+	set model(v) {
+		throw new Error("You cannot set model");
+	}
+
+	get model() {
+		return this.#model;
+	}
+
 	async add(data = {}) {
-		const d = this.model(data);
+		const d = this.#model(data);
 		await d.save();
 	}
 }
